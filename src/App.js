@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import './App.css';
+// import './App.css';
 import ToDoList from './ToDoList';
 
 function App() {
@@ -20,6 +20,16 @@ function App() {
     setInputList("");
   };
 
+  const deleteItem = (id) => {
+    console.log("deleted");
+
+    setItem((oldItem) => {
+      return oldItem.filter((arrElement, index) => {
+        return index !== id;
+      });
+    });
+  };
+
   return (
     <div className="App">
       <div className="main">
@@ -32,8 +42,8 @@ function App() {
 
           <ol>
 
-            {item.map((itemval) => {
-              return <ToDoList text = {itemval} />;
+            {item.map((itemval, index) => {
+              return <ToDoList key={index} id={index} text = {itemval}  onSelect = {deleteItem}/>;
             })}
           </ol>
         </div>
